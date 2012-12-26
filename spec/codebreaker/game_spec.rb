@@ -6,7 +6,7 @@ module Codebreaker
 		let(:game) { Game.new(output) }		
 
 		describe '#start' do	
-			it "send welcomd message" do				
+			it "send welcome message" do
 				output.should_receive(:puts).with('Welcome to Codebreaker!')
 				game.start('1234')
 			end
@@ -47,7 +47,16 @@ module Codebreaker
 					output.should_receive(:puts).with('+')
 					game.guess('1555')
 				end
-			end
+      end
+
+      context "with one number match and one exact match (in that order)" do
+        it "send a mark with '-+'" do
+          game.start('1234')
+          output.should_receive(:puts).with('-+')
+          game.guess('2735')
+        end
+      end
+
 		end
 	end
 end
