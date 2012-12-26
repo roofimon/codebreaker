@@ -17,25 +17,22 @@ end
 
 When /^I start a new game$/ do
 	game = Codebreaker::Game.new(output)
-	game.start
+	game.start('1234')
 end
 
 Then /^I should see "(.*?)"$/ do |message|
   	output.messages.should include(message)
 end
 
-
-=begin
-Then /^I should see "([^"]*)"$/ do |message|
-	output.message.should include(message)
+Given /^the secret code is "(.*?)"$/ do |secret|
+	@game = Codebreaker::Game.new(output)
+	@game.start(secret)
 end
 
-Given /^the secret code is "(.*?)"$/ do |arg1|
+When /^I guess "(.*?)"$/ do |guess|
+	@game.guess(guess)
 end
 
-When /^I guess "(.*?)"$/ do |arg1|
+Then /^the mark should be "(.*?)"$/ do |mark|
+ 	output.messages.should include(mark)
 end
-
-Then /^the mark should be "(.*?)"$/ do |arg1|
-end
-=end
