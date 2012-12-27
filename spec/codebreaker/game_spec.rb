@@ -17,46 +17,13 @@ module Codebreaker
 		end
 
 		describe '#guess' do
-			context "witn no match" do
-				it "send a mark with ''" do
+			context "with no match" do
+				it "send a mark to output" do
 					game.start('1234')
-					output.should_receive(:puts).with('') 
-					game.guess('5555')
+					output.should_receive(:puts).with('++++')
+					game.guess('1234')
 				end
 			end
-
-			context "with one number match" do
-				it "send a mark with '-'" do
-					game.start('1234')
-					output.should_receive(:puts).with('-')
-					game.guess('2555')
-				end
-			end
-
-			context "with two number matched" do
-				it "send a mark with '--'" do
-					game.start('1234')
-					output.should_receive(:puts).with('--')
-					game.guess('3455')
-				end
-			end
-
-			context "with one exact match" do
-				it "send a mark with ''+" do
-					game.start('1234')
-					output.should_receive(:puts).with('+')
-					game.guess('1555')
-				end
-      end
-
-      context "with one number match and one exact match (in that order)" do
-        it "send a mark with '-+'" do
-          game.start('1234')
-          output.should_receive(:puts).with('+-')
-          game.guess('2735')
-        end
-      end
-
 		end
 	end
 end
